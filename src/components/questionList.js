@@ -13,7 +13,8 @@ class QuestionList extends Component {
 
   componentWillMount() {
     console.log('componentWillMount in QuestionList');
-    fetch('https://opentdb.com/api.php?amount=10&category=9')
+    console.log(this.props.categoryId);
+    fetch('https://opentdb.com/api.php?amount=10&category={this.props.categoryId}')
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({

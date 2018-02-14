@@ -17,6 +17,8 @@ class LoginActivity extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      placeholder: '',
+      placeholderId: ''
     };
   }
 
@@ -28,7 +30,9 @@ class LoginActivity extends Component {
   };
 
   StartQuiz = () => {
-    this.props.navigation.navigate('main');
+    this.props.navigation.navigate('main', {
+      categoryId: this.state.placeholderId,
+    });
     console.log('MainActivity started...');
   }
 
@@ -61,10 +65,17 @@ class MainActivity extends Component {
   };
 
   render() {
+    const { params } = this.props.navigation.state;
+    const categoryId = params ? (params.categoryId + 9) : null;
+    const encodedId = encodeURIComponent(categoryId);
+
+    console.log(categoryId);
+    console.log(encodedId);
+
     return (
       <View>
         <Header headerText={'Quiz App'} />
-        <QuestionList categoryId={this.props.placeholderId} />
+        <QuestionList categoryId={encodedId} />
       </View>
     );
   }
