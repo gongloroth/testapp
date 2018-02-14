@@ -1,26 +1,44 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, ActivityIndicator } from 'react-native';
 import QuestionDetail from './questionDetail';
 
-class questionList extends Component {
-  state = { questions: [] };
+class QuestionList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: [],
+      isLoading: true,
+    };
+  }
 
   componentWillMount() {
     console.log('componentWillMount in QuestionList');
-    fetch('https://opentdb.com/api_category.php')
+    fetch('https://opentdb.com/api.php?amount=10&category=9')
     .then((response) => response.json())
     .then((responseData) => {
-      this.setState({ questions: responseData.trivia_categories });
+      this.setState({
+        questions: responseData.results,
+        isLoading: false
+       });
     });
   }
 
 renderQuestions() {
   return this.state.questions.map(
-      question => <QuestionDetail key={question.name} question={question} />
+      questions => <QuestionDetail key={questions.question} question={questions} />
     );
 }
 
   render() {
+     if (this.state.isLoading) {
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <ActivityIndicator />
+        </View>
+      );
+    }
+
+    console.log(this.props.categoryId);
     console.log(this.state);
 
     return (
@@ -31,4 +49,4 @@ renderQuestions() {
   }
 }
 
-export default questionList;
+export default QuestionList;

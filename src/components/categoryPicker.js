@@ -7,28 +7,33 @@ class CategoryPicker extends Component {
     this.state = {
     isLoading: true,
     PickerValueHolder: '',
+    PickerValueHolderId: ''
     };
   }
 
    componentWillMount() {
-     console.log('componentWillMount in QuestionList');
+     console.log('componentWillMount in categoryPicker');
      fetch('https://opentdb.com/api_category.php')
      .then((response) => response.json())
+     .catch((error) => {
+     console.log(error);
+      })
      .then((responseData) => {
        this.setState({
          isLoading: false,
-         categories: responseData.trivia_categories
-          });
+         categories: responseData.trivia_categories,
+       });
      });
    }
 
-   updateCategory = (itemValue) => {
-      this.setState({ PickerValueHolder: itemValue });
+   updateCategory = (itemValue, key) => {
+      this.setState({ PickerValueHolder: itemValue, PickerValueHolderId: key });
+      this.props.updateState(itemValue, key);
    }
 
    renderCategories() {
-     return this.state.categories.map((item, key) => (
-       <Picker.Item label={item.name} value={item.name} key={key} />)
+     return this.state.categories.map((item) => (
+       <Picker.Item label={item.name} value={item.name} key={item.id} />)
     );
    }
 
