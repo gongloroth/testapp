@@ -12,9 +12,23 @@ class QuestionList extends Component {
   }
 
   componentWillMount() {
+    const params = {
+      amount: 10,
+      category: this.props.categoryId,
+    };
+    let url = 'https://opentdb.com/api.php?';
+
+    const esc = encodeURIComponent;
+    let query = Object.keys(params)
+    .map(k => `${esc(k)}=${esc(params[k])}`)
+    .join('&');
+    console.log(query);
+
+    url += query;
+    console.log(url);
+
     console.log('componentWillMount in QuestionList');
-    console.log(this.props.categoryId);
-    fetch('https://opentdb.com/api.php?amount=10&category={this.props.categoryId}')
+    fetch(url)
     .then((response) => response.json())
     .then((responseData) => {
       this.setState({

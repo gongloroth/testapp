@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import Card from './card';
 
 const QuestionDetail = (props) => {
+
   return (
-    <View>
+    <Card>
       <Text>Question Label</Text>
-      <Text>{props.question.question}</Text>
-    </View>
+      <Text style={styles.textStyle}>{ (props.question.question) }</Text>
+    </Card>
   );
+};
+
+const styles = {
+  textStyle: {
+    textAlign: 'center'
+  }
 };
 
 export default QuestionDetail;

@@ -36,10 +36,6 @@ class LoginActivity extends Component {
     console.log('MainActivity started...');
   }
 
-  ShowCat = () => {
-    console.log(this.state);
-  }
-
   render() {
     return (
       <View>
@@ -49,10 +45,6 @@ class LoginActivity extends Component {
          onPress={this.StartQuiz}
          title="Start Quiz"
          color="#2196F3" />
-         <Button
-          onPress={this.ShowCat}
-          title="ShowCat"
-          color="#2196F3" />
       </View>
     );
   }
