@@ -9,7 +9,7 @@
   "dependencies": {
     "query-string": "^5.1.0",
     "react": "16.2.0",
-    "react-native": "0.53.0",
+    "react-native": "0.70.2",
     "react-navigation": "^1.0.3"
   },
   "devDependencies": {
